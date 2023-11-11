@@ -6,8 +6,8 @@ import { storeToRefs } from 'pinia'
 
 // const mock = useAddressMockStore()
 // const {filteredTodos, filterOptions } = storeToRefs(mock)
-const todoStore = useAddressMockStore()
-const {address} = storeToRefs(todoStore)
+const addressStore = useAddressMockStore()
+const {address} = storeToRefs(addressStore)
 
 </script>
 
@@ -34,17 +34,17 @@ const {address} = storeToRefs(todoStore)
             :key="contact.id"
             class="contact"
         >
-            <li class="name">
-                <span class="firstLetter">F</span>
+            <li class="contact__name">
+                <span class="firstLetter">{{ contact.name[0] }}</span>
                 {{ contact.name }}
             </li>
-            <li class="tel">
+            <li class="contact__tel">
                 {{ contact.tel }}
             </li>
-            <li class="mail">
+            <li class="contact__mail">
                 {{ contact.mail }}
             </li>
-            <li class="dateOfCreation">
+            <li class="contact__dateOfCreation">
                 {{ contact.dateOfCreation }}
             </li>
         </ul>
@@ -71,6 +71,22 @@ const {address} = storeToRefs(todoStore)
     text-align: left;
     text-transform: uppercase;
     color: #B5B5B5;
+    &__name {
+    width: 296px;
+    margin-right: 87px;
+    }
+    &__tel {
+    width: 112px;
+    margin-right: 87px;
+    }
+    &__mail {
+    width: 208px;
+    margin-right: 87px;
+    }
+    &__dateOfCreation {
+    width: 112px;
+    text-align: right;
+    }
 }
 .contact {
     list-style: none;
@@ -85,6 +101,31 @@ const {address} = storeToRefs(todoStore)
     line-height: 48px;
     letter-spacing: 0em;
     border-bottom: 1px solid #EAF2FD;
+    &__name {
+    display: flex;
+    height: 48px;
+    width: 296px;
+    vertical-align: middle;
+    margin-right: 87px;
+    }
+
+    &__tel {
+        height: 48px;
+        width: 112px;
+        margin-right: 87px;
+    }
+
+    &__mail {
+        height: 48px;
+        width: 208px;
+        margin-right: 87px;
+    }
+
+    &__dateOfCreation {
+        height: 48px;
+        width: 112px;
+        text-align: right;
+    }
 }
 .firstLetter {
     text-align: center;
@@ -94,44 +135,6 @@ const {address} = storeToRefs(todoStore)
     height: 24px;
     border-radius: 56px;
     background-color: #FFC700;
-}
-.name {
-    display: flex;
-    height: 48px;
-    width: 296px;
-    vertical-align: middle;
-    margin-right: 87px;
-}
-.property__name {
-    width: 296px;
-    margin-right: 87px;
-}
-.tel {
-    height: 48px;
-    width: 112px;
-    margin-right: 87px;
-}
-.property__tel {
-    width: 112px;
-    margin-right: 87px;
-}
-.mail {
-    height: 48px;
-    width: 208px;
-    margin-right: 87px;
-}
-.property__mail {
-    width: 208px;
-    margin-right: 87px;
-}
-.dateOfCreation {
-    height: 48px;
-    width: 112px;
-    text-align: right;
-}
-.property__dateOfCreation {
-    width: 112px;
-    text-align: right;
 }
 
 </style>

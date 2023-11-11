@@ -17,14 +17,14 @@ export const useAddressMockStore = defineStore('addressMockStore', {
         tel: 79876547809,
         mail: 'qwwwwwwqqqq@gmail.com',
         dateOfCreation: '22.09.2023',
-        category: 'Родственник'
+        category: 'Коллега'
       },
       {
         id: 3,
         name: 'Двери Вадим',
         tel: 79876547809,
         mail: 'qqqqq@gmail.com',
-        dateOfCreation: '22.09.2023',
+        dateOfCreation: '23.09.2023',
         category: 'Родственник'
       },
       {
@@ -32,20 +32,22 @@ export const useAddressMockStore = defineStore('addressMockStore', {
         name: 'Доставка Андрей Стоянов',
         tel: 79876547809,
         mail: 'qqqqq@gmail.com',
-        dateOfCreation: '22.09.2023',
+        dateOfCreation: '24.09.2023',
         category: 'Родственник'
       },
     ],
-    filterOptions: [
+    sortOptions: [
       {
-        key: 'isFavorite',
-        label: 'Избранное',
-        isApply: false,
+        value: 'ВСЕ',
+        label: 'ВСЕ',
       },
       {
-        key: 'isDone',
-        label: 'Выполнено',
-        isApply: false,
+        value: 'Родственник',
+        label: 'Родственник',
+      },
+      {
+        value: 'Коллега',
+        label: 'Коллега',
       }
     ],
   }),
@@ -53,16 +55,17 @@ export const useAddressMockStore = defineStore('addressMockStore', {
     deleteTodo(id) {
         this.todos = this.todos.filter(t => t.id !==id)
     },
-    createTodo(title,isFavorite) {
-      if(title) {
-      const newTodo = {
+    createTodo(name,tel,mail,category) {
+      if(name,tel,mail,category) {
+      const newContact = {
         id: Date.now(),
-        title: title,
-        isDone: false,
-        isFavorite: isFavorite,
+        name: name,
+        tel: tel,
+        mail: mail,
+        category:category,
+        dateOfCreation: new Date().toISOString().slice(0,10).split('-').reverse().join('.'),
       }
-      this.todos.unshift(newTodo)
-      this.isdialogFormVisible = false
+      this.address.push(newContact)
     }
   },
 editTodo(updatedTodo) { 
