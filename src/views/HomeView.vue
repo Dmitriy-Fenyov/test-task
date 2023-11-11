@@ -32,21 +32,23 @@ const {address} = storeToRefs(addressStore)
         <ul 
             v-for="contact in address"           
             :key="contact.id"
-            class="contact"
+            style="padding: 0;"
         >
-            <li class="contact__name">
-                <span class="firstLetter">{{ contact.name[0] }}</span>
-                {{ contact.name }}
-            </li>
-            <li class="contact__tel">
-                {{ contact.tel }}
-            </li>
-            <li class="contact__mail">
-                {{ contact.mail }}
-            </li>
-            <li class="contact__dateOfCreation">
-                {{ contact.dateOfCreation }}
-            </li>
+            <RouterLink :to="'/contact/' + contact.id" class="contact">
+                <li class="contact__name">
+                    <span class="firstLetter">{{ contact.name[0] }}</span>
+                    {{ contact.name }}
+                </li>
+                <li class="contact__tel">
+                    {{ contact.tel }}
+                </li>
+                <li class="contact__mail">
+                    {{ contact.mail }}
+                </li>
+                <li class="contact__dateOfCreation">
+                    {{ contact.dateOfCreation }}
+                </li>
+            </RouterLink>
         </ul>
     </div>
 </template>
@@ -90,6 +92,7 @@ const {address} = storeToRefs(addressStore)
 }
 .contact {
     list-style: none;
+    text-decoration: none;
     display: flex;
     padding: 0;
     margin: 0;
@@ -100,6 +103,7 @@ const {address} = storeToRefs(addressStore)
     font-weight: 400;
     line-height: 48px;
     letter-spacing: 0em;
+    color: #545454;
     border-bottom: 1px solid #EAF2FD;
     &__name {
     display: flex;

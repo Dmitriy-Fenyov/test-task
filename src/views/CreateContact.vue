@@ -58,7 +58,7 @@ const addItem = () => {
     position: relative;
     box-sizing: border-box;
     width: 704px;
-    margin: 0 auto;
+    margin: 24px auto 0;
     padding: 48px 64px 136px 64px;
     box-shadow: 0px 0px 6px 0px #94B5E159;
     &__title {

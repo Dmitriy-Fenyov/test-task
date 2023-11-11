@@ -47,13 +47,13 @@ export const useAddressMockStore = defineStore('addressMockStore', {
       },
       {
         value: 'Коллега',
-        label: 'Коллега',
+        name: 'Коллега',
       }
     ],
   }),
   actions: {
-    deleteTodo(id) {
-        this.todos = this.todos.filter(t => t.id !==id)
+    deleteContact(id) {
+        this.address = this.address.filter(t => t.id !==id)
     },
     createTodo(name,tel,mail,category) {
       if(name,tel,mail,category) {
@@ -68,18 +68,18 @@ export const useAddressMockStore = defineStore('addressMockStore', {
       this.address.push(newContact)
     }
   },
-editTodo(updatedTodo) { 
-  const index = this.todos.findIndex(el => el.id === updatedTodo.id)
-  this.todos[index] = updatedTodo
+editContact(updateContact) { 
+  const index = this.address.findIndex(el => el.id === updateContact.id)
+  this.address[index] = updateContact
 },
   },
   getters: {
 		filteredTodos: (state) => {
-      const filterBy = state.filterOptions.filter(el => el.isApply === true)
-      const result = state.todos.filter(todo => {
+      const filterBy = state.filterOptions.filter(el => el.value === true)
+      const result = state.address.filter(contact => {
         for (let i = 0; i < filterBy.length; i++) {
           const key = filterBy[i].key
-          const isMatched = todo[key] === true
+          const isMatched = contact[key] === true
           if (!isMatched) {
             return false
           }
