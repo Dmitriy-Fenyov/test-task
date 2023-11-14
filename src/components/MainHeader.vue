@@ -12,6 +12,12 @@
   align-items: center;
   padding: 8px 48px;
   background-color: #282828;
+  @media (min-width: 768px) and (max-width: 1199px) {
+    padding: 8px 32px;
+    }
+    @media (min-width: 376px) and (max-width: 768px) {
+    padding: 8px 12px;
+    }
   &__title {
     margin: 0 0 0 20px;
     font-size: 18px;

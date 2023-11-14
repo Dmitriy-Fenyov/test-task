@@ -6,7 +6,7 @@ export const useAddressMockStore = defineStore('addressMockStore', {
       {
         id: 1,
         name: 'Айтишник Данила',
-        tel: 79876547809,
+        tel: '+7(987)654-78-09',
         mail: 'qqqeeeqq@gmail.com',
         dateOfCreation: '22.09.2023',
         category: 'Родственник'
@@ -14,7 +14,7 @@ export const useAddressMockStore = defineStore('addressMockStore', {
       {
         id: 2,
         name: 'Арендодатель Виктория',
-        tel: 79876547809,
+        tel: '+7(987)654-78-10',
         mail: 'qwwwwwwqqqq@gmail.com',
         dateOfCreation: '22.09.2023',
         category: 'Коллега'
@@ -22,7 +22,7 @@ export const useAddressMockStore = defineStore('addressMockStore', {
       {
         id: 3,
         name: 'Двери Вадим',
-        tel: 79876547809,
+        tel: '+7(987)654-78-11',
         mail: 'qqqqq@gmail.com',
         dateOfCreation: '23.09.2023',
         category: 'Родственник'
@@ -30,13 +30,13 @@ export const useAddressMockStore = defineStore('addressMockStore', {
       {
         id: 4,
         name: 'Доставка Андрей Стоянов',
-        tel: 79876547809,
+        tel: '+7(987)654-78-12',
         mail: 'qqqqq@gmail.com',
         dateOfCreation: '24.09.2023',
         category: 'Родственник'
       },
     ],
-    sortOptions: [
+    filterOptions: [
       {
         value: 'ВСЕ',
         label: 'ВСЕ',
@@ -50,43 +50,39 @@ export const useAddressMockStore = defineStore('addressMockStore', {
         name: 'Коллега',
       }
     ],
+    filterValue: 'ВСЕ',
   }),
   actions: {
     deleteContact(id) {
-        this.address = this.address.filter(t => t.id !==id)
+      this.address = this.address.filter(t => t.id !== id)
     },
-    createTodo(name,tel,mail,category) {
-      if(name,tel,mail,category) {
-      const newContact = {
-        id: Date.now(),
-        name: name,
-        tel: tel,
-        mail: mail,
-        category:category,
-        dateOfCreation: new Date().toISOString().slice(0,10).split('-').reverse().join('.'),
+    createTodo(name, tel, mail, category) {
+      if (name, tel, mail, category) {
+        const newContact = {
+          id: Date.now(),
+          name: name,
+          tel: tel,
+          mail: mail,
+          category: category,
+          dateOfCreation: new Date().toISOString().slice(0, 10).split('-').reverse().join('.'),
+        }
+        this.address.push(newContact)
       }
-      this.address.push(newContact)
+    },
+    editContact(updateContact) {
+      const index = this.address.findIndex(el => el.id === updateContact.id)
+      this.address[index] = updateContact
+    },
+    updateFilterValue(value) {
+      this.filterValue = value;
     }
-  },
-editContact(updateContact) { 
-  const index = this.address.findIndex(el => el.id === updateContact.id)
-  this.address[index] = updateContact
-},
   },
   getters: {
-		filteredTodos: (state) => {
-      const filterBy = state.filterOptions.filter(el => el.value === true)
-      const result = state.address.filter(contact => {
-        for (let i = 0; i < filterBy.length; i++) {
-          const key = filterBy[i].key
-          const isMatched = contact[key] === true
-          if (!isMatched) {
-            return false
-          }
-        }
-        return true
-      })
-      return result
-    }
-	},
+    filteredContacts: (state) => {
+      if (state.filterValue === 'ВСЕ') {
+        return state.address
+      }
+      return state.address.filter(contact => contact.category === state.filterValue)
+    },
+  },
 })

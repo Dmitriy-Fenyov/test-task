@@ -7,9 +7,6 @@
 
 <style lang="scss" scoped>
 .btn {
-    position: absolute;
-    left: 182px;
-    bottom: 64px;
     width: 136px;
     height: 40px;
     padding: 12px, 16px, 12px, 16px;
@@ -25,6 +22,13 @@
     cursor: pointer;
     text-transform: uppercase;
     color: #545454;
+    @media (min-width: 376px) and (max-width: 576px) {
+        width: 124px;
+        height: 32px;
+        left: 60px;
+        font-size: 12px;
+        line-height: 14.4px;
+    }
     &:hover {
         background:#FFD84C;
     }

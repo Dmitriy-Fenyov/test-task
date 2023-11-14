@@ -26,10 +26,10 @@ onBeforeMount(() => {
 </script>
 
 <template>
-    <header class="page-createHeader">
+    <header class="сontactCard__Header">
         <span class="firstLetter">{{ contact.name[0] }}</span>
-        <p class="page-createHeader__title"> {{contact.name}}</p>
-        <button class="page-createHeader__close-button" type="button" @click="() => { router.push({name:'home'}) }">
+        <p class="сontactCard__Header__title"> {{contact.name}}</p>
+        <button class="сontactCard__Header__close-button" type="button" @click="() => { router.push({name:'home'}) }">
             <span class="visually-hidden">Закрыть меню</span>
         </button>
     </header>
@@ -54,7 +54,8 @@ onBeforeMount(() => {
             <el-form-item label="Создан">
                 <p class="сontactCard__text"> {{ contact.dateOfCreation }}</p>
             </el-form-item>
-            <MyButton  @click="handleSave" />
+        </el-form>
+        <MyButton class="сontactCard__btnSave"  @click="handleSave" />
             <el-button
                 class="сontactCard__btnDelete"
                 type="primary"
@@ -66,7 +67,6 @@ onBeforeMount(() => {
                 </span>
                 Удалить контакт
             </el-button>
-        </el-form>
     </div>
 </template>
 
@@ -78,20 +78,41 @@ onBeforeMount(() => {
   margin: 24px auto 0;
   padding: 48px 64px 136px 64px;
   box-shadow: 0px 0px 6px 0px #94B5E159;
+  @media (min-width: 576px) and (max-width: 768px) {
+    width: 552px;
+    padding: 32px 48px 112px 48px;
+  }
+  @media (min-width: 376px) and (max-width: 576px) {
+    width: 352px;
+    padding: 32px 20px 112px 20px;
+  }
   &__title {
-  margin: 0;
-  margin-bottom: 24px;
+    margin: 0;
+    margin-bottom: 24px;
+    color: #545454;
   }
   &__input {
-      width: 408px;
+    width: 408px;
+    @media (min-width: 576px) and (max-width: 768px) {
+    width: 288px;
+    }
+    @media (min-width: 376px) and (max-width: 576px) {
+        width: 228px;
+    }
   }
   &__text {
-      margin: 0;
-      color: #545454;
-
+    margin: 0;
+    color: #545454;
+  }
+  &__btnSave{
+    margin-left: 168px;
+    margin-top: 14px;
+    @media (max-width: 576px) {
+        margin-left: 30px;
+    }
   }
 }
-.page-createHeader {
+.сontactCard__Header {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -137,9 +158,7 @@ onBeforeMount(() => {
     }   
 }
 .сontactCard__btnDelete {
-    position: absolute;
-    left: 350px;
-    bottom: 74px;
+    margin-left: 25px;
     font-family: Proxima Nova;
     font-size: 12px;
     font-weight: 400;
@@ -151,6 +170,7 @@ onBeforeMount(() => {
     background-color: white;
     cursor: pointer;
 }
+
 .firstLetter {
     text-align: center;
     line-height: 24px;
