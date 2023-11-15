@@ -1,6 +1,6 @@
 <template>
     <button class="btn">
-        <span><img src="@/assets/save.svg"  alt="Сохранить" width="12" height="12"></span>
+        <span><img src="@/assets/save.svg" alt="Сохранить" width="12" height="12"></span>
         Сохранить
     </button>
 </template>
@@ -30,7 +30,7 @@
         line-height: 14.4px;
     }
     &:hover {
-        background:#FFD84C;
+        background: #FFD84C;
     }
     &:active {
         background: #F3C41E;

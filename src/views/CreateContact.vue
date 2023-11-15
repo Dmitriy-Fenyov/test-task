@@ -4,44 +4,84 @@
             <h2 class="createContact__title">Новый контакт</h2>
             <el-form :model="validateForm" label-width="120px">
                 <el-form-item label="Имя">
-                    <el-input class="createContact__input" :class="{ 'error':  !formFields.name.isValid }" placeholder="Например «Андрей»..." v-model="name" />
+                    <el-input 
+                      class="createContact__input" 
+                      :class="{ 'error':  !formFields.name.isValid }" 
+                      placeholder="Например «Андрей»..." 
+                      v-model="name" 
+                    />
                       <p class="createContact__allert" v-show="!formFields.name.isValid">
                         Слишком короткое имя
                       </p>
-                      <span class="createContact__allertIcon" v-show="!formFields.name.isValid"><img src="@/assets/alert.svg"  alt="Внимание" width="13.3" height="13.3"></span>
+                      <span class="createContact__allertIcon" v-show="!formFields.name.isValid">
+                        <img src="@/assets/alert.svg"  alt="Внимание" width="13.3" height="13.3">
+                      </span>
                 </el-form-item>
                 <el-form-item label="Телефон">
-                    <el-input class="createContact__input" :class="{ 'error':  !formFields.tel.isValid }" placeholder="+7(___)___-__-__" v-model="tel" :formatter="telFormatter" />
+                    <el-input 
+                      class="createContact__input" 
+                      :class="{ 'error':  !formFields.tel.isValid }" 
+                      placeholder="+7(___)___-__-__" 
+                      v-model="tel" 
+                      :formatter="telFormatter" 
+                    />
                     <p class="createContact__allert" v-show="!formFields.tel.isValid">
                       Некорректный номер
                     </p>
-                    <span class="createContact__allertIcon" v-show="!formFields.tel.isValid"><img src="@/assets/alert.svg"  alt="Внимание" width="13.3" height="13.3"></span>
+                    <span class="createContact__allertIcon" v-show="!formFields.tel.isValid">
+                      <img src="@/assets/alert.svg"  alt="Внимание" width="13.3" height="13.3">
+                    </span>
                 </el-form-item>
                 <el-form-item label="E-mail">
-                    <el-input class="createContact__input" type="email" :class="{ 'error':  !formFields.mail.isValid }" placeholder="Например «pochta@domain.ru»..." v-model="mail" />
+                    <el-input 
+                      class="createContact__input" 
+                      type="email" 
+                      :class="{ 'error':  !formFields.mail.isValid }" 
+                      placeholder="Например «pochta@domain.ru»..." 
+                      v-model="mail"
+                    />
                     <p class="createContact__allert" v-show="!formFields.mail.isValid">
                       Не корректный e-mail
                     </p>
-                    <span class="createContact__allertIcon" v-show="!formFields.mail.isValid"><img src="@/assets/alert.svg"  alt="Внимание" width="13.3" height="13.3"></span>
+                    <span class="createContact__allertIcon" v-show="!formFields.mail.isValid">
+                      <img src="@/assets/alert.svg"  alt="Внимание" width="13.3" height="13.3">
+                    </span>
                 </el-form-item>
                 <el-form-item label="Категория">
-                    <el-select class="createContact__input" v-model="category" :class="{ 'error':  !formFields.category.isValid }" placeholder="Не выбрано" :suffix-icon="ElSelectSuffixIcon">
-                        <el-option label="Родственник" value="Родственник" />
-                        <el-option label="Коллега" value="Коллега" />
+                    <el-select 
+                      class="createContact__input" 
+                      v-model="category" 
+                      :class="{ 'error':  !formFields.category.isValid }" 
+                      placeholder="Не выбрано" 
+                      :suffix-icon="ElSelectSuffixIcon"
+                    >
+                      <el-option label="Родственник" value="Родственник" />
+                      <el-option label="Коллега" value="Коллега" />
                     </el-select>
                     <p class="createContact__allert" v-show="!formFields.category.isValid">
                       Поле не может быть пустым
                     </p>
-                    <span class="createContact__allertIcon" v-show="!formFields.category.isValid"><img src="@/assets/alert.svg"  alt="Внимание" width="13.3" height="13.3"></span>
+                    <span class="createContact__allertIcon" v-show="!formFields.category.isValid">
+                      <img src="@/assets/alert.svg"  alt="Внимание" width="13.3" height="13.3">
+                    </span>
                 </el-form-item>
             </el-form>
-            <MyButton class="createContact__btnSave" @click.prevent="addItem" />
+            <el-button 
+              type="warning" 
+              class="createContact__btnSave" 
+              @click.prevent="addItem" 
+              :loading="!isLoaded" 
+            > 
+              <span v-show="isLoaded" style="margin-right: 6px;">
+                <img src="@/assets/save.svg"  alt="Сохранить" width="12" height="12">
+              </span>
+              Сохранить
+            </el-button>
         </div>
   </template>
   
 <script setup>
 import CreateHeader from '../components/CreateHeader.vue';
-import MyButton from '../components/MyButton.vue';
 import ElSelectSuffixIcon from '../components/ElSelectSuffixIcon.vue';
 import {useAddressMockStore} from '../stores/MockStore';
 import { ref } from 'vue'
@@ -50,6 +90,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const addressStore = useAddressMockStore()
 const isFormValid = ref(true)
+const isLoaded =  ref(true)
 const name = ref('')
 const tel = ref('')
 const mail = ref('')
@@ -96,87 +137,114 @@ const validateForm = () => {
 const addItem = () => {
   validateForm()
   if (isFormValid.value === true) {
-    console.log(name.value)
+    isLoaded.value= false
+    setTimeout(async() => {
     addressStore.createTodo(name.value, tel.value, mail.value, category.value)
     name.value = ''
     tel.value = ''
     mail.value = ''
     category.value = ''
+    isLoaded.value = true
     router.push({name:'home'})
+  },3000)
   }
+
 }
 </script>
 <style lang="scss" scoped>
-   .createContact {
-    position: relative;
-    box-sizing: border-box;
-    width: 704px;
-    margin: 24px auto 0;
-    padding: 48px 64px 136px 64px;
-    box-shadow: 0px 0px 6px 0px #94B5E159;
+.createContact {
+  position: relative;
+  box-sizing: border-box;
+  width: 704px;
+  margin: 24px auto 0;
+  padding: 48px 64px 136px 64px;
+  box-shadow: 0px 0px 6px 0px #94B5E159;
+  @media (min-width: 576px) and (max-width: 768px) {
+    width: 552px;
+  }
+  @media (min-width: 376px) and (max-width: 576px) {
+    width: 352px;
+    padding: 32px 20px 112px 20px;
+  }
+  :deep(.el-form-item__label) {
+    justify-content: flex-start;
+  }
+  &__title {
+    margin: 0;
+    margin-bottom: 24px;
+    color: #545454;
+  }
+  &__input {
+    width: 408px;
+    margin-left: auto;
+    &.error {
+      --el-border-color: #EB5757;
+      --el-input-focus-border-color: #be4848;
+      --el-input-hover-border-color: #f02a2a;
+      :deep(.el-input__inner::placeholder) {
+        color: #EB5757;
+      }
+    } 
+  }
+  &__btnSave {
+    margin-left: 168px;
+    margin-top: 14px;
+    width: 136px;
+    height: 40px;
+    padding: 12px, 16px, 12px, 16px;
+    border-radius: 4px;
+    background: #FFC700;
+    font-family: Proxima Nova;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 17px;
+    letter-spacing: 0em;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    color: #545454;
     @media (min-width: 576px) and (max-width: 768px) {
-      width: 552px;
+      margin-left: 119px;
     }
     @media (min-width: 376px) and (max-width: 576px) {
-      width: 352px;
-      padding: 32px 20px 112px 20px;
+        margin-left: 119px;
+        width: 124px;
+        height: 32px;
+        font-size: 12px;
+        line-height: 14.4px;
     }
-    :deep(.el-form-item__label) {
-      justify-content: flex-start;
+    &:hover {
+        color: #545454;
+        background:#FFD84C;
     }
-    &__title {
-      margin: 0;
-      margin-bottom: 24px;
-      color: #545454;
+    &:active {
+        color: #545454;
+        background: #F3C41E;
     }
-    &__input {
-      width: 408px;
-      margin-left: auto;
-      &.error {
-        --el-border-color: #EB5757;
-        --el-input-focus-border-color: #be4848;
-        --el-input-hover-border-color: #f02a2a;
-        :deep(.el-input__inner::placeholder) {
-          color: #EB5757;
-        }
-      }
-      @media (min-width: 576px) and (max-width: 768px) {
-        width: 288px;
-      }
-      @media (min-width: 376px) and (max-width: 576px) {
-          width: 228px;
-      }   
     }
-    &__btnSave {
-      margin-left: 168px;
-      margin-top: 14px;
-      @media (max-width: 576px) {
-          margin-left: 84px;
-      }
-    }
-    &__allert {
-      position: absolute;
-      top: 33px;
-      right: 0;
-      margin: 0;
-      font-family: Proxima Nova;
-      font-size: 10px;
-      font-weight: 400;
-      line-height: 16px;
-      letter-spacing: 0em;
-      text-align: left;
-      color: #EB5757;
-    }
-    &__allertIcon {
-      position: absolute;
-      top: 50%;
-      right: 10px;
-      transform: translateY(-50%);
-      margin: 0;
-      line-height: 0;
-      background-color: #fff;
-    }
-    
+  &__allert {
+    position: absolute;
+    top: 33px;
+    right: 0;
+    margin: 0;
+    font-family: Proxima Nova;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #EB5757;
+  }
+  &__allertIcon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    margin: 0;
+    line-height: 0;
+    background-color: #fff;
+  }
 }
   </style>
   

@@ -4,11 +4,8 @@ import MainHeader from '../components/MainHeader.vue';
 import {useAddressMockStore} from '../stores/MockStore';
 import { storeToRefs } from 'pinia'
 
-// const mock = useAddressMockStore()
-// const {filteredTodos, filterOptions } = storeToRefs(mock)
 const addressStore = useAddressMockStore()
 const {filteredContacts} = storeToRefs(addressStore)
-
 </script>
 
 <template>
@@ -58,7 +55,6 @@ const {filteredContacts} = storeToRefs(addressStore)
 </template>
 
 <style lang="scss" scoped>
-
 .wrapper {
     width: 990px;
     margin: 0 auto;
@@ -98,7 +94,6 @@ const {filteredContacts} = storeToRefs(addressStore)
             width: 41.76%;
         }
     }
-
     &__tel {
         width: 43%;
         @media (min-width: 768px) and (max-width: 992px) {
@@ -111,11 +106,9 @@ const {filteredContacts} = storeToRefs(addressStore)
             width: 45%;
         }
     }
-
     &__mail {
         width: 30.8%;
     }
-
     &__dateOfCreation {
         width: 11.73%;
         padding-right: 0;
@@ -165,21 +158,18 @@ const {filteredContacts} = storeToRefs(addressStore)
             width: 41.76%;
         }
     }
-
     &__tel {
         width: 40.8%;
         @media (min-width: 376px) and (max-width: 576px) {
             width: 100%;
         }
     }
-
     &__mail {
         width: 30.8%;
         @media (min-width: 376px) and (max-width: 576px) {
             width: 100%;
         }
     }
-
     &__dateOfCreation {
         width: 11.73%;
         padding-right: 0;
@@ -216,5 +206,4 @@ const {filteredContacts} = storeToRefs(addressStore)
 .row {
     flex-direction: row;
 }
-
 </style>

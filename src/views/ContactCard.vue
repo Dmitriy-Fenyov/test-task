@@ -1,5 +1,4 @@
 <script setup>
-import MyButton from '../components/MyButton.vue';
 import {useAddressMockStore} from '@/stores/MockStore';
 import { storeToRefs } from 'pinia'
 import { ref, onBeforeMount } from 'vue'
@@ -10,9 +9,14 @@ const {address} = storeToRefs(addressStore)
 const route = useRoute()
 const router = useRouter()
 const contact = ref({})
+const isLoaded =  ref(true)
 const handleSave = () => {
-    addressStore.editContact(contact.value)
-    router.push({name:'home'})
+    isLoaded.value= false
+    setTimeout(async() => {
+        addressStore.editContact(contact.value)
+        isLoaded.value= true
+        router.push({name:'home'})
+    },3000)
 }
 const deleteContact = () => {
     addressStore.deleteContact(contact.value.id)
@@ -29,7 +33,11 @@ onBeforeMount(() => {
     <header class="сontactCard__Header">
         <span class="firstLetter">{{ contact.name[0] }}</span>
         <p class="сontactCard__Header__title"> {{contact.name}}</p>
-        <button class="сontactCard__Header__close-button" type="button" @click="() => { router.push({name:'home'}) }">
+        <button 
+            class="сontactCard__Header__close-button" 
+            type="button" 
+            @click="() => { router.push({name:'home'}) }"
+        >
             <span class="visually-hidden">Закрыть меню</span>
         </button>
     </header>
@@ -55,18 +63,30 @@ onBeforeMount(() => {
                 <p class="сontactCard__text"> {{ contact.dateOfCreation }}</p>
             </el-form-item>
         </el-form>
-        <MyButton class="сontactCard__btnSave"  @click="handleSave" />
-            <el-button
-                class="сontactCard__btnDelete"
-                type="primary"
-                link
-                @click="deleteContact"
-            >
-                <span style="margin-right: 2px;">
-                    <img src="@/assets/delete.svg"  alt="корзина" width="10" height="10">
-                </span>
-                Удалить контакт
-            </el-button>
+        <el-button 
+            type="warning" 
+            class="сontactCard__btnSave" 
+            @click="handleSave" :loading="!isLoaded"
+        > 
+        <span 
+            v-show="isLoaded" 
+            style="margin-right: 6px;"
+        >
+        <img src="@/assets/save.svg"  alt="Сохранить" width="12" height="12">
+        </span>
+        Сохранить
+        </el-button>
+        <el-button
+            class="сontactCard__btnDelete"
+            type="primary"
+            link
+            @click="deleteContact"
+        >
+            <span style="margin-right: 2px;">
+                <img src="@/assets/delete.svg" alt="корзина" width="10" height="10">
+            </span>
+            Удалить контакт
+        </el-button>
     </div>
 </template>
 
@@ -86,6 +106,9 @@ onBeforeMount(() => {
     width: 352px;
     padding: 32px 20px 112px 20px;
   }
+  :deep(.el-form-item__label) {
+      justify-content: flex-start;
+    }
   &__title {
     margin: 0;
     margin-bottom: 24px;
@@ -93,22 +116,49 @@ onBeforeMount(() => {
   }
   &__input {
     width: 408px;
-    @media (min-width: 576px) and (max-width: 768px) {
-    width: 288px;
-    }
-    @media (min-width: 376px) and (max-width: 576px) {
-        width: 228px;
-    }
+    margin-left: auto;
   }
   &__text {
     margin: 0;
+    margin-left: auto;
+    width: 408px;
     color: #545454;
   }
   &__btnSave{
     margin-left: 168px;
     margin-top: 14px;
-    @media (max-width: 576px) {
+    width: 136px;
+    height: 40px;
+    padding: 12px, 16px, 12px, 16px;
+    border-radius: 4px;
+    background: #FFC700;
+    font-family: Proxima Nova;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 17px;
+    letter-spacing: 0em;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    color: #545454;
+    @media (min-width: 576px) and (max-width: 768px) {
+        margin-left: 119px;
+    }
+    @media (min-width: 376px) and (max-width: 576px) {
         margin-left: 30px;
+        width: 124px;
+        height: 32px;
+        font-size: 12px;
+        line-height: 14.4px;
+    }
+    &:hover {
+        color: #545454;
+        background:#FFD84C;
+    }
+    &:active {
+        color: #545454;
+        background: #F3C41E;
     }
   }
 }
@@ -158,6 +208,7 @@ onBeforeMount(() => {
     }   
 }
 .сontactCard__btnDelete {
+    margin-top: 15px;
     margin-left: 25px;
     font-family: Proxima Nova;
     font-size: 12px;
@@ -170,7 +221,6 @@ onBeforeMount(() => {
     background-color: white;
     cursor: pointer;
 }
-
 .firstLetter {
     text-align: center;
     line-height: 24px;

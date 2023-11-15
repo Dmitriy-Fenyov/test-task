@@ -61,7 +61,6 @@ const router = useRouter()
         }
     }   
 }
-
 .visually-hidden {
     visibility: hidden;
 }

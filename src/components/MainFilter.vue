@@ -1,7 +1,13 @@
 <template>
   <div class="wrapper__filter">
     <div class="main-filter">
-      <el-select v-model="value" class="m-2 main-filter__select" placeholder="ВСЕ" size="large" @change="onFilterChange">
+      <el-select 
+        v-model="value" 
+        class="m-2 main-filter__select" 
+        placeholder="ВСЕ" 
+        size="large" 
+        @change="onFilterChange"
+      >
         <el-option
           v-for="item in filterOptions"
           :key="item.value"
@@ -29,7 +35,6 @@ const addressStore = useAddressMockStore()
 const {filterOptions} = storeToRefs(addressStore)
 const value = ref('')
 const onFilterChange = (val) => {
-  console.log('val:', val)
   addressStore.updateFilterValue(val)
 }
 </script>
@@ -48,20 +53,20 @@ const onFilterChange = (val) => {
     margin: 0 auto;
     align-items: center;
     @media (min-width: 992px) and (max-width: 1200px) {
-        width: 928px;
-        padding: 0 32px;
+      width: 928px;
+      padding: 0 32px;
     }
     @media (min-width: 768px) and (max-width: 991px) {
-        width: 704px;
-        padding: 0 32px;
+      width: 704px;
+      padding: 0 32px;
     }
     @media (min-width: 576px) and (max-width: 768px) {
-        width: 552px;
-        padding: 0 12px;
+      width: 552px;
+      padding: 0 12px;
     }
     @media (min-width: 376px) and (max-width: 576px) {
-        width: 352px;
-        padding: 0 12px;
+      width: 352px;
+      padding: 0 12px;
     }
     &__select {
     height: 40px;
@@ -104,6 +109,5 @@ const onFilterChange = (val) => {
         }
     }
   }
-
 </style>
   
