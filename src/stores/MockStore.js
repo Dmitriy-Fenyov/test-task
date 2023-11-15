@@ -15,7 +15,7 @@ export const useAddressMockStore = defineStore('addressMockStore', {
         id: 2,
         name: 'Арендодатель Виктория',
         tel: '+7(987)654-78-10',
-        mail: 'qwwwwwwqqqq@gmail.com',
+        mail: 'qwwwwqqq@gmail.com',
         dateOfCreation: '22.09.2023',
         category: 'Коллега'
       },
@@ -60,7 +60,7 @@ export const useAddressMockStore = defineStore('addressMockStore', {
       if (name, tel, mail, category) {
         const newContact = {
           id: Date.now(),
-          name: name,
+          name: name.charAt(0).toUpperCase() + name.slice(1),
           tel: tel,
           mail: mail,
           category: category,

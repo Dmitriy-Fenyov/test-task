@@ -11,21 +11,21 @@
                       <span class="createContact__allertIcon" v-show="!formFields.name.isValid"><img src="@/assets/alert.svg"  alt="Внимание" width="13.3" height="13.3"></span>
                 </el-form-item>
                 <el-form-item label="Телефон">
-                    <el-input class="createContact__input" :class="{ 'error':  !formFields.name.isValid }" placeholder="+7(___)___-__-__" v-model="tel" :formatter="telFormatter" />
+                    <el-input class="createContact__input" :class="{ 'error':  !formFields.tel.isValid }" placeholder="+7(___)___-__-__" v-model="tel" :formatter="telFormatter" />
                     <p class="createContact__allert" v-show="!formFields.tel.isValid">
                       Некорректный номер
                     </p>
                     <span class="createContact__allertIcon" v-show="!formFields.tel.isValid"><img src="@/assets/alert.svg"  alt="Внимание" width="13.3" height="13.3"></span>
                 </el-form-item>
                 <el-form-item label="E-mail">
-                    <el-input class="createContact__input" type="email" :class="{ 'error':  !formFields.name.isValid }" placeholder="Например «pochta@domain.ru»..." v-model="mail" />
+                    <el-input class="createContact__input" type="email" :class="{ 'error':  !formFields.mail.isValid }" placeholder="Например «pochta@domain.ru»..." v-model="mail" />
                     <p class="createContact__allert" v-show="!formFields.mail.isValid">
                       Не корректный e-mail
                     </p>
                     <span class="createContact__allertIcon" v-show="!formFields.mail.isValid"><img src="@/assets/alert.svg"  alt="Внимание" width="13.3" height="13.3"></span>
                 </el-form-item>
                 <el-form-item label="Категория">
-                    <el-select class="createContact__input" v-model="category" :class="{ 'error':  !formFields.name.isValid }" placeholder="Не выбрано" :suffix-icon="ElSelectSuffixIcon">
+                    <el-select class="createContact__input" v-model="category" :class="{ 'error':  !formFields.category.isValid }" placeholder="Не выбрано" :suffix-icon="ElSelectSuffixIcon">
                         <el-option label="Родственник" value="Родственник" />
                         <el-option label="Коллега" value="Коллега" />
                     </el-select>
@@ -67,7 +67,7 @@ const formFields = ref({
   },
   tel: {
     ref: tel,
-    getIsValid: (val) => val.length >= 17,
+    getIsValid: (val) => val.length >= 16,
     isValid: true,
   },
   mail: {

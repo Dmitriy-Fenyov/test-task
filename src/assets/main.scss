@@ -1,1 +1,11 @@
 @import 'normalize.css';
+.display {
+    @media (max-width: 576px) {
+        display: none;
+    }
+}
+.display__none {
+    @media (min-width: 576px) {
+        display: none;
+    }
+}

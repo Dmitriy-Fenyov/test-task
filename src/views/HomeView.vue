@@ -14,43 +14,47 @@ const {filteredContacts} = storeToRefs(addressStore)
 <template>
     <MainHeader />
     <MainFilter />
-    <div class="wrapper">
-        <ul class="property">
-            <li class="property__name">
+    <ul class="wrapper">
+        <li class="property">
+            <p class="property__name">
                 Контакт
-            </li>
-            <li class="property__tel">
-                Телефон
-            </li>
-            <li class="property__mail">
-                E-mail
-            </li>
-            <li class="property__dateOfCreation">
+            </p>
+            <div class="wrapper__flexBox row">
+                <p class="property__tel">
+                    Телефон <span class="display__none"> /</span>
+                </p>
+                <p class="property__mail">
+                    E-mail
+                </p>
+            </div>
+            <p class="property__dateOfCreation">
                 Создан
-            </li>
-        </ul>
-        <ul 
-            v-for="contact in filteredContacts"           
+            </p>
+        </li>
+        <li 
+            v-for="contact in filteredContacts"             
             :key="contact.id"
-            style="padding: 0; margin: 0;"
+            style="padding: 0; margin: 0; list-style: none;"
         >
             <RouterLink :to="'/contact/' + contact.id" class="contact">
                 <p class="contact__name">
                     <span class="firstLetter">{{ contact.name[0] }}</span>
                     {{ contact.name }}
                 </p>
-                <p class="contact__tel">
-                    {{ contact.tel }}
-                </p>
-                <p class="contact__mail">
-                    {{ contact.mail }}
-                </p>
+                <div class="wrapper__flexBox">
+                    <p class="contact__tel">
+                        {{ contact.tel }}
+                    </p>
+                    <p class="contact__mail">
+                        {{ contact.mail }}
+                    </p>
+                </div>
                 <p class="contact__dateOfCreation">
                     {{ contact.dateOfCreation }}
                 </p>
             </RouterLink>
-        </ul>
-    </div>
+        </li>
+    </ul>
 </template>
 
 <style lang="scss" scoped>
@@ -58,14 +62,18 @@ const {filteredContacts} = storeToRefs(addressStore)
 .wrapper {
     width: 990px;
     margin: 0 auto;
+    padding: 0;
     @media (min-width: 992px) and (max-width: 1200px) {
         width: 928px;
     }
-    @media (min-width: 768px) and (max-width: 991px) {
+    @media (min-width: 768px) and (max-width: 992px) {
         width: 704px;
     }
     @media (min-width: 576px) and (max-width: 768px) {
         width: 552px;
+    }
+    @media (min-width: 376px) and (max-width: 576px) {
+        width: 352px;
     }
 }
 .property {
@@ -84,32 +92,37 @@ const {filteredContacts} = storeToRefs(addressStore)
     text-transform: uppercase;
     color: #B5B5B5;
     &__name {
-    width: 296px;
-    margin-right: 87px;
-    @media (min-width: 992px) and (max-width: 1200px) {
-        width: 264px;
-        margin-right: 66.7px;
+        width: 38.37%;
+        vertical-align: middle;
+        @media (min-width: 376px) and (max-width: 576px) {
+            width: 41.76%;
+        }
     }
-    @media (min-width: 768px) and (max-width: 991px) {
-        width: 208px;
-        margin-right: 8px;
-    }
-    @media (min-width: 576px) and (max-width: 768px) {
-        width: 208px;
-        margin-right: 52px;
-    }
-    }
+
     &__tel {
-    width: 112px;
-    margin-right: 87px;
+        width: 43%;
+        @media (min-width: 768px) and (max-width: 992px) {
+            width: 44%;
+        }
+        @media (min-width: 576px) and (max-width: 768px) {
+            width: 45.5%;
+        }
+        @media (min-width: 376px) and (max-width: 576px) {
+            width: 45%;
+        }
     }
+
     &__mail {
-    width: 208px;
-    margin-right: 87px;
+        width: 30.8%;
     }
+
     &__dateOfCreation {
-    width: 112px;
-    text-align: right;
+        width: 11.73%;
+        padding-right: 0;
+        text-align: right;
+        @media (min-width: 376px) and (max-width: 576px) {
+            width: 16.47%
+        }
     }
 }
 .contact {
@@ -127,45 +140,53 @@ const {filteredContacts} = storeToRefs(addressStore)
     letter-spacing: 0em;
     color: #545454;
     border-bottom: 1px solid #EAF2FD;
-    @media (min-width: 992px) and (max-width: 1200px) {
-        // width: 264px;
-        // margin-right: 66.7px;
-    }
     @media (min-width: 768px) and (max-width: 991px) {
-        // width: 208px;
-        // margin-right: 8px;
+        font-size: 12px;
+        line-height: 19px;
     }
     @media (min-width: 576px) and (max-width: 768px) {
-        // width: 208px;
-        // margin-right: 52px;
+        font-size: 12px;
+        line-height: 19px;
+    }
+    @media (min-width: 376px) and (max-width: 576px) {
+        font-size: 12px;
+        line-height: 13.44px;
     }
     &__name,  &__tel, &__mail, &__dateOfCreation {
         align-items: center;
-        width: 25%;
         margin: 0;
         padding-right: 12px;
     }
     &__name {
-    display: flex;
-    // width: 296px;
-    vertical-align: middle;
-    // margin-right: 87px;
+        display: flex;
+        width: 36.67%;
+        vertical-align: middle;
+        @media (min-width: 376px) and (max-width: 576px) {
+            width: 41.76%;
+        }
     }
 
     &__tel {
-        // width: 112px;
-        // margin-right: 87px;
+        width: 40.8%;
+        @media (min-width: 376px) and (max-width: 576px) {
+            width: 100%;
+        }
     }
 
     &__mail {
-        // width: 208px;
-        // margin-right: 87px;
+        width: 30.8%;
+        @media (min-width: 376px) and (max-width: 576px) {
+            width: 100%;
+        }
     }
 
     &__dateOfCreation {
-        // width: 112px;
+        width: 11.73%;
         padding-right: 0;
         text-align: right;
+        @media (min-width: 376px) and (max-width: 576px) {
+            width: 16.47%
+        }
     }
 }
 .firstLetter {
@@ -177,6 +198,23 @@ const {filteredContacts} = storeToRefs(addressStore)
     text-align: center;
     background-color: #FFC700;
     border-radius: 56px;
+    @media (max-width: 576px) {
+        display: none;
+    }
+}
+.wrapper__flexBox {
+    display: flex;
+    width: 51.6%;
+    @media (max-width: 576px) {
+        flex-direction: column;
+        width: 41.76%;
+        font-family: Proxima Nova;
+        font-size: 12px;
+        line-height: 16px;
+    }
+}
+.row {
+    flex-direction: row;
 }
 
 </style>

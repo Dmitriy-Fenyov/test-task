@@ -12,7 +12,7 @@
       <RouterLink to="/create">
         <button type="button" class="main-filter__btn">
           <span class="main-filter__btn__span"></span>
-          Добавить контакт
+          Добавить <span class="display"> контакт</span>
         </button>
       </RouterLink>
     </div>
@@ -32,30 +32,13 @@ const onFilterChange = (val) => {
   console.log('val:', val)
   addressStore.updateFilterValue(val)
 }
-
-  // export default {
-  //   name: 'main-filter',
-  //   props: {
-  //     modelValue: {
-  //       type: String
-  //     },
-  //     options: {
-  //       type: Array
-  //     }
-  //   },
-  //   methods: {
-  //     changeOption(event) {
-  //       this.$emit('update:modelValue', event.target.value)
-  //     }
-  //   }
-  // }
 </script>
 
 <style lang="scss" scoped>
   .wrapper__filter {
     border: 1px solid #EAF2FD;
     margin-bottom: 16px;
-    padding: 0 32px;
+    padding: 0;
   }
   .main-filter {
     display: flex;
@@ -73,16 +56,18 @@ const onFilterChange = (val) => {
         padding: 0 32px;
     }
     @media (min-width: 576px) and (max-width: 768px) {
-        width: 576px;
+        width: 552px;
         padding: 0 12px;
     }
     @media (min-width: 376px) and (max-width: 576px) {
-        width: 376px;
+        width: 352px;
         padding: 0 12px;
     }
     &__select {
     height: 40px;
-    width: 235px;
+    @media (max-width: 991px) {
+      height: 40px;
+    }
     }
     &__btn {
       position: relative;
