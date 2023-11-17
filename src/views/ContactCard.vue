@@ -1,8 +1,10 @@
 <script setup>
-import {useAddressMockStore} from '@/stores/MockStore';
 import { storeToRefs } from 'pinia'
 import { ref, onBeforeMount } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import {useAddressMockStore} from '@/stores/MockStore';
+import SuccessNotification from '@/components/SuccessNotification.vue'
+
 
 const addressStore = useAddressMockStore()
 const {address} = storeToRefs(addressStore)
@@ -10,17 +12,20 @@ const route = useRoute()
 const router = useRouter()
 const contact = ref({})
 const isLoaded =  ref(true)
+const successNotification = ref(null)
 const handleSave = () => {
-    isLoaded.value= false
-    setTimeout(async() => {
-        addressStore.editContact(contact.value)
-        isLoaded.value= true
-        router.push({name:'home'})
-    },3000)
+  isLoaded.value= false
+  setTimeout(async() => {
+    addressStore.editContact(contact.value)
+    isLoaded.value= true
+    successNotification.value.open()
+    router.push({name:'home'})
+  },3000)
 }
 const deleteContact = () => {
-    addressStore.deleteContact(contact.value.id)
-    router.push({name:'home'})
+  addressStore.deleteContact(contact.value.id)
+  successNotification.value.open()
+  router.push({name:'home'})
 }
 
 onBeforeMount(() => {
@@ -30,64 +35,66 @@ onBeforeMount(() => {
 </script>
 
 <template>
-    <header class="сontactCard__Header">
-        <span class="firstLetter">{{ contact.name[0] }}</span>
-        <p class="сontactCard__Header__title"> {{contact.name}}</p>
-        <button 
-            class="сontactCard__Header__close-button" 
-            type="button" 
-            @click="() => { router.push({name:'home'}) }"
-        >
-            <span class="visually-hidden">Закрыть меню</span>
-        </button>
-    </header>
-    <div class="сontactCard">
-        <h1 class="сontactCard__title">Контакт</h1>
-        <el-form label-width="120px">
-            <el-form-item label="Имя">
-                <el-input class="сontactCard__input" v-model="contact.name"></el-input>
-            </el-form-item>
-            <el-form-item label="Телефон">
-                <el-input class="сontactCard__input" v-model="contact.tel" />
-            </el-form-item>
-            <el-form-item label="E-mail">
-                <el-input class="сontactCard__input" v-model="contact.mail" />
-            </el-form-item>
-            <el-form-item label="Категория">
-                <el-select class="сontactCard__input" v-model="contact.category" placeholder="Не выбрано">
-                    <el-option label="Родственник" value="Родственник" />
-                    <el-option label="Коллега" value="Коллега" />
-                </el-select>
-            </el-form-item>
-            <el-form-item label="Создан">
-                <p class="сontactCard__text"> {{ contact.dateOfCreation }}</p>
-            </el-form-item>
-        </el-form>
-        <el-button 
-            type="warning" 
-            class="сontactCard__btnSave" 
-            @click="handleSave" :loading="!isLoaded"
-        > 
-        <span 
-            v-show="isLoaded" 
-            style="margin-right: 6px;"
-        >
-        <img src="@/assets/save.svg"  alt="Сохранить" width="12" height="12">
-        </span>
-        Сохранить
-        </el-button>
-        <el-button
-            class="сontactCard__btnDelete"
-            type="primary"
-            link
-            @click="deleteContact"
-        >
-            <span style="margin-right: 2px;">
-                <img src="@/assets/delete.svg" alt="корзина" width="10" height="10">
-            </span>
-            Удалить контакт
-        </el-button>
-    </div>
+  <header class="сontactCard__Header">
+    <span class="firstLetter">{{ contact.name[0] }}</span>
+    <p class="сontactCard__Header__title"> {{contact.name}}</p>
+    <button 
+      class="сontactCard__Header__close-button" 
+      type="button" 
+      @click="() => { router.push({name:'home'}) }"
+    >
+      <span class="visually-hidden">Закрыть меню</span>
+    </button>
+  </header>
+  <div class="сontactCard">
+    <h1 class="сontactCard__title">Контакт</h1>
+    <el-form label-width="120px">
+      <el-form-item label="Имя">
+        <el-input class="сontactCard__input" v-model="contact.name"></el-input>
+      </el-form-item>
+      <el-form-item label="Телефон">
+        <el-input class="сontactCard__input" v-model="contact.tel" />
+      </el-form-item>
+      <el-form-item label="E-mail">
+        <el-input class="сontactCard__input" v-model="contact.mail" />
+      </el-form-item>
+      <el-form-item label="Категория">
+        <el-select class="сontactCard__input" v-model="contact.category" placeholder="Не выбрано">
+          <el-option label="Родственник" value="Родственник" />
+          <el-option label="Коллега" value="Коллега" />
+        </el-select>
+      </el-form-item>
+      <el-form-item label="Создан">
+        <p class="сontactCard__text"> {{ contact.dateOfCreation }}</p>
+      </el-form-item>
+    </el-form>
+    <el-button 
+        type="warning" 
+        class="сontactCard__btnSave" 
+        @click="handleSave" :loading="!isLoaded"
+    > 
+    <span 
+        v-show="isLoaded" 
+        style="margin-right: 6px;"
+    >
+    <img src="@/assets/save.svg"  alt="Сохранить" width="12" height="12">
+    </span>
+    Сохранить
+    </el-button>
+    <el-button
+      class="сontactCard__btnDelete"
+      type="primary"
+      link
+      @click="deleteContact"
+    >
+      <span style="margin-right: 2px;">
+        <img src="@/assets/delete.svg" alt="корзина" width="10" height="10">
+      </span>
+      Удалить контакт
+    </el-button>
+  </div>
+  <SuccessNotification ref="successNotification" message="Контакт удалён" />
+  <SuccessNotification ref="successNotification" message="Контакт успешно создан" />
 </template>
 
 <style lang="scss" scoped>
@@ -107,8 +114,8 @@ onBeforeMount(() => {
     padding: 32px 20px 112px 20px;
   }
   :deep(.el-form-item__label) {
-      justify-content: flex-start;
-    }
+    justify-content: flex-start;
+  }
   &__title {
     margin: 0;
     margin-bottom: 24px;
@@ -143,43 +150,43 @@ onBeforeMount(() => {
     text-transform: uppercase;
     color: #545454;
     @media (min-width: 576px) and (max-width: 768px) {
-        margin-left: 119px;
+      margin-left: 119px;
     }
     @media (min-width: 376px) and (max-width: 576px) {
-        margin-left: 30px;
-        width: 124px;
-        height: 32px;
-        font-size: 12px;
-        line-height: 14.4px;
+      margin-left: 30px;
+      width: 124px;
+      height: 32px;
+      font-size: 12px;
+      line-height: 14.4px;
     }
     &:hover {
-        color: #545454;
-        background:#FFD84C;
+      color: #545454;
+      background:#FFD84C;
     }
     &:active {
-        color: #545454;
-        background: #F3C41E;
+      color: #545454;
+      background: #F3C41E;
     }
   }
 }
 .сontactCard__Header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 11.5px 48px;
-    margin: 0 auto;
-    background-color: #282828;
-    &__title {
-        margin: 0 0 0 10px;
-        font-family: Proxima Nova;
-        font-size: 20px;
-        font-weight: 700;
-        line-height: 24px;
-        letter-spacing: 0em;
-        text-align: center;
-        color: #E0E0E0;
-    }
-    &__close-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 11.5px 48px;
+  margin: 0 auto;
+  background-color: #282828;
+  &__title {
+    margin: 0 0 0 10px;
+    font-family: Proxima Nova;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #E0E0E0;
+  }
+  &__close-button {
     position: absolute;
     top: 17px;
     right: 10px;
@@ -189,48 +196,48 @@ onBeforeMount(() => {
     background-color: transparent;
     cursor: pointer;
     border: none;
-        &::before,
-        &::after {
-            content: "";
-            position: absolute;
-            top: 5px;
-            right: 30px;
-            width: 18.7px;
-            height: 3px;
-            background-color: #939393;
-        }
-        &::before {
-            transform: rotate(45deg);
-        }
-        &::after {
-            transform: rotate(-45deg);
-        }
-    }   
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        top: 5px;
+        right: 30px;
+        width: 18.7px;
+        height: 3px;
+        background-color: #939393;
+      }
+      &::before {
+        transform: rotate(45deg);
+      }
+      &::after {
+        transform: rotate(-45deg);
+      }
+  }   
 }
 .сontactCard__btnDelete {
-    margin-top: 15px;
-    margin-left: 25px;
-    font-family: Proxima Nova;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 15px;
-    letter-spacing: 0em;
-    text-align: right;
-    color: #2F80ED;
-    border: none;
-    background-color: white;
-    cursor: pointer;
+  margin-top: 15px;
+  margin-left: 25px;
+  font-family: Proxima Nova;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15px;
+  letter-spacing: 0em;
+  text-align: right;
+  color: #2F80ED;
+  border: none;
+  background-color: white;
+  cursor: pointer;
 }
 .firstLetter {
-    text-align: center;
-    line-height: 24px;
-    margin: 0;
-    width: 24px;
-    height: 24px;
-    border-radius: 56px;
-    background-color: #FFC700;
+  text-align: center;
+  line-height: 24px;
+  margin: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 56px;
+  background-color: #FFC700;
 }
 .visually-hidden {
-    visibility: hidden;
+  visibility: hidden;
 }
 </style>

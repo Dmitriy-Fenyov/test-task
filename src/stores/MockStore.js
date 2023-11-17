@@ -56,7 +56,7 @@ export const useAddressMockStore = defineStore('addressMockStore', {
     deleteContact(id) {
       this.address = this.address.filter(t => t.id !== id)
     },
-    createTodo(name, tel, mail, category) {
+    createConcat(name, tel, mail, category) {
       if (name, tel, mail, category) {
         const newContact = {
           id: Date.now(),
