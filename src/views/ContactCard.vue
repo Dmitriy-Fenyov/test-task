@@ -12,19 +12,20 @@ const route = useRoute()
 const router = useRouter()
 const contact = ref({})
 const isLoaded =  ref(true)
-const successNotification = ref(null)
+const notificationDelete = ref(null)
+const notificationChange = ref(null)
 const handleSave = () => {
   isLoaded.value= false
   setTimeout(async() => {
     addressStore.editContact(contact.value)
     isLoaded.value= true
-    successNotification.value.open()
+    notificationChange.value.open()
     router.push({name:'home'})
   },3000)
 }
 const deleteContact = () => {
   addressStore.deleteContact(contact.value.id)
-  successNotification.value.open()
+  notificationDelete.value.open()
   router.push({name:'home'})
 }
 
@@ -93,8 +94,8 @@ onBeforeMount(() => {
       Удалить контакт
     </el-button>
   </div>
-  <SuccessNotification ref="successNotification" message="Контакт удалён" />
-  <SuccessNotification ref="successNotification" message="Контакт успешно создан" />
+  <SuccessNotification ref="notificationDelete" message="Контакт удалён" />
+  <SuccessNotification ref="notificationChange" message="Контакт успешно изменён" />
 </template>
 
 <style lang="scss" scoped>
