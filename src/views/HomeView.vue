@@ -2,10 +2,10 @@
 import { storeToRefs } from 'pinia'
 import MainFilter from '@/components/MainFilter.vue';
 import MainHeader from '@/components/MainHeader.vue';
-import {useAddressMockStore} from '@/stores/MockStore';
+import { useAddressMockStore } from '@/stores/MockStore';
 
 const addressStore = useAddressMockStore()
-const {filteredContacts} = storeToRefs(addressStore)
+const { filteredContacts } = storeToRefs(addressStore)
 </script>
 
 <template>
@@ -28,10 +28,11 @@ const {filteredContacts} = storeToRefs(addressStore)
         Создан
       </p>
     </li>
-    <li 
-      v-for="contact in filteredContacts"             
+    <li
+      v-for="contact in filteredContacts"
       :key="contact.id"
-      style="padding: 0; margin: 0; list-style: none;"
+      style="padding: 0; margin: 0;
+      list-style: none;"
     >
       <RouterLink :to="'/contact/' + contact.id" class="contact">
         <p class="contact__name">
@@ -59,19 +60,24 @@ const {filteredContacts} = storeToRefs(addressStore)
   width: 990px;
   margin: 0 auto;
   padding: 0;
+
   @media (min-width: 992px) and (max-width: 1200px) {
     width: 928px;
   }
+
   @media (min-width: 768px) and (max-width: 992px) {
     width: 704px;
   }
+
   @media (min-width: 576px) and (max-width: 768px) {
     width: 552px;
   }
+
   @media (min-width: 376px) and (max-width: 576px) {
     width: 352px;
   }
 }
+
 .property {
   list-style: none;
   display: flex;
@@ -87,37 +93,57 @@ const {filteredContacts} = storeToRefs(addressStore)
   text-align: left;
   text-transform: uppercase;
   color: #B5B5B5;
+
   &__name {
-      width: 38.37%;
-      vertical-align: middle;
-      @media (min-width: 376px) and (max-width: 576px) {
-          width: 41.76%;
-      }
+    width: 38%;
+    vertical-align: middle;
+    margin: 4px 0;
+
+    @media (min-width: 576px) and (max-width: 768px) {
+      width: 38.6%;
+    }
+
+    @media (min-width: 376px) and (max-width: 576px) {
+      width: 45%;
+    }
   }
+
   &__tel {
-      width: 43%;
-      @media (min-width: 768px) and (max-width: 992px) {
-          width: 44%;
-      }
-      @media (min-width: 576px) and (max-width: 768px) {
-          width: 45.5%;
-      }
-      @media (min-width: 376px) and (max-width: 576px) {
-          width: 45%;
-      }
+    width: 43%;
+    margin: 4px 0;
+
+    @media (min-width: 768px) and (max-width: 992px) {
+      width: 44%;
+    }
+
+    @media (min-width: 576px) and (max-width: 768px) {
+      width: 45.5%;
+    }
+
+    @media (min-width: 376px) and (max-width: 576px) {
+      width: 38%;
+      font-size: 10px;
+    }
   }
+
   &__mail {
-      width: 30.8%;
+    width: 30.8%;
+    font-size: 10px;
+    margin: 4px 0;
   }
+
   &__dateOfCreation {
-      width: 11.73%;
-      padding-right: 0;
-      text-align: right;
-      @media (min-width: 376px) and (max-width: 576px) {
-          width: 16.47%
-      }
+    width: 11.73%;
+    padding-right: 0;
+    margin: 4px 0;
+    text-align: right;
+
+    @media (min-width: 376px) and (max-width: 576px) {
+      width: 16.47%
+    }
   }
 }
+
 .contact {
   list-style: none;
   text-decoration: none;
@@ -133,52 +159,68 @@ const {filteredContacts} = storeToRefs(addressStore)
   letter-spacing: 0em;
   color: #545454;
   border-bottom: 1px solid #EAF2FD;
+
   @media (min-width: 768px) and (max-width: 991px) {
     font-size: 12px;
     line-height: 19px;
   }
+
   @media (min-width: 576px) and (max-width: 768px) {
     font-size: 12px;
     line-height: 19px;
   }
+
   @media (min-width: 376px) and (max-width: 576px) {
     font-size: 12px;
     line-height: 13.44px;
   }
-  &__name,  &__tel, &__mail, &__dateOfCreation {
+
+  &__name,
+  &__tel,
+  &__mail,
+  &__dateOfCreation {
     align-items: center;
     margin: 0;
     padding-right: 12px;
   }
+
   &__name {
     display: flex;
     width: 36.67%;
     vertical-align: middle;
+
     @media (min-width: 376px) and (max-width: 576px) {
       width: 41.76%;
     }
   }
+
   &__tel {
     width: 40.8%;
+
     @media (min-width: 376px) and (max-width: 576px) {
       width: 100%;
     }
   }
+
   &__mail {
     width: 30.8%;
+
     @media (min-width: 376px) and (max-width: 576px) {
       width: 100%;
     }
   }
+
   &__dateOfCreation {
     width: 11.73%;
     padding-right: 0;
     text-align: right;
+
     @media (min-width: 376px) and (max-width: 576px) {
       width: 16.47%
     }
   }
 }
+
 .firstLetter {
   flex-shrink: 0;
   width: 24px;
@@ -188,13 +230,16 @@ const {filteredContacts} = storeToRefs(addressStore)
   text-align: center;
   background-color: #FFC700;
   border-radius: 56px;
+
   @media (max-width: 576px) {
     display: none;
   }
 }
+
 .wrapper__flexBox {
   display: flex;
   width: 51.6%;
+
   @media (max-width: 576px) {
     flex-direction: column;
     width: 41.76%;
@@ -203,7 +248,7 @@ const {filteredContacts} = storeToRefs(addressStore)
     line-height: 16px;
   }
 }
+
 .row {
   flex-direction: row;
-}
-</style>
+}</style>

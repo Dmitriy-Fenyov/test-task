@@ -1,11 +1,11 @@
 <template>
   <div class="wrapper__filter">
     <div class="main-filter">
-      <el-select 
-        v-model="value" 
-        class="m-2 main-filter__select" 
-        placeholder="ВСЕ" 
-        size="large" 
+      <el-select
+        v-model="value"
+        class="m-2 main-filter__select"
+        placeholder="ВСЕ"
+        size="large"
         @change="onFilterChange"
         :suffix-icon="ElSelectSuffixIcon"
       >
@@ -25,16 +25,16 @@
     </div>
   </div>
 </template>
-  
+
 <script setup >
-import { RouterLink} from 'vue-router'
+import { RouterLink } from 'vue-router'
 import { ref } from 'vue'
-import {useAddressMockStore} from '@/stores/MockStore';
+import { useAddressMockStore } from '@/stores/MockStore';
 import { storeToRefs } from 'pinia'
 import ElSelectSuffixIcon from '@/components/ElSelectSuffixIcon.vue';
 
 const addressStore = useAddressMockStore()
-const {filterOptions} = storeToRefs(addressStore)
+const { filterOptions } = storeToRefs(addressStore)
 const value = ref('')
 const onFilterChange = (val) => {
   addressStore.updateFilterValue(val)
@@ -43,39 +43,48 @@ const onFilterChange = (val) => {
 
 <style lang="scss" scoped>
 .wrapper__filter {
-  border: 1px solid #EAF2FD;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   padding: 0;
+  border: 1px solid #EAF2FD;
 }
+
 .main-filter {
   display: flex;
   justify-content: space-between;
   width: 990px;
-  height: 56px;
+  padding: 8px 0;
   margin: 0 auto;
   align-items: center;
+
   @media (min-width: 992px) and (max-width: 1200px) {
     width: 928px;
-    padding: 0 32px;
+    padding: 8px 32px;
   }
-  @media (min-width: 768px) and (max-width: 991px) {
+
+  @media (min-width: 768px) and (max-width: 992px) {
     width: 704px;
-    padding: 0 32px;
+    padding: 8px 32px;
   }
+
   @media (min-width: 576px) and (max-width: 768px) {
     width: 552px;
-    padding: 0 12px;
+    padding: 8px 12px;
   }
+
   @media (min-width: 376px) and (max-width: 576px) {
     width: 352px;
-    padding: 0 12px;
+    padding: 8px 12px;
   }
+
   &__select {
-  height: 40px;
-  @media (max-width: 991px) {
     height: 40px;
+
+    @media (max-width: 991px) {
+      height: 32px;
+      margin-right: 16px;
+    }
   }
-  }
+
   &__btn {
     position: relative;
     height: 32px;
@@ -92,24 +101,40 @@ const onFilterChange = (val) => {
     text-align: center;
     text-transform: uppercase;
     cursor: pointer;
+
     &::before,
-      &::after {
-        content: "";
-        position: absolute;
-        top: 14.5px;
-        left: 16px;
-        width: 10.7px;
-        height: 1px;
-        background-color: #2F80ED;
-      }
-      &::before {
-        transform: rotate(90deg);
-      }
-      &__span {
-        width: 11px;
-        height: 11px;
-      }
+    &::after {
+      content: "";
+      position: absolute;
+      top: 14.5px;
+      left: 16px;
+      width: 10.7px;
+      height: 1px;
+      background-color: #2F80ED;
+    }
+
+    &::before {
+      transform: rotate(90deg);
+    }
+
+    &__span {
+      width: 11px;
+      height: 11px;
+    }
   }
 }
+:global(.el-input--large .el-input__inner) {
+  height: 40px;
+  width: 183px;
+  @media (max-width: 991px) {
+    height: 32px;
+  }
+  @media (max-width: 576px) {
+    width: 166px;
+  }
+}
+
+:global(.el-input--large .el-input__wrapper) {
+  padding: 0 8px;
+}
 </style>
-  

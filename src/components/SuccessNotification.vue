@@ -2,6 +2,7 @@
 import { h } from 'vue'
 import { useMediaQuery } from '@vueuse/core'
 import { ElNotification, ElMessage } from 'element-plus'
+import iconOk from "@/assets/iconOk.svg"
 
 const props = defineProps({
   message: {
@@ -10,17 +11,16 @@ const props = defineProps({
   },
   duration: {
     type: Number,
-    default: 30000,
+    default: 30000000,
   }
 })
 
 const openDesktopNotification = () => {
   ElNotification({
     duration: props.duration,
-    message: h('p', { class: 'success-notification' }, props.message),
+    message: h('p', null, props.message),
     icon: h('img', {
-      class: 'success-notification__icon',
-      src: './src/assets/iconOk.svg',
+      src: iconOk,
       width: 20,
       height: 20,
     }),
@@ -32,10 +32,9 @@ const openDesktopNotification = () => {
 const openMobileNotification = () => {
   ElMessage({
     duration: props.duration,
-    message: h('p', { class: 'success-notification' }, props.message),
+    message: h('p', null, props.message),
     icon: h('img', {
-      class: 'success-notification__icon',
-      src: './src/assets/iconOk.svg',
+      src: iconOk,
       width: 13.33,
       height: 13.33,
     }),
@@ -58,10 +57,49 @@ defineExpose({
 
 <style langs="scss" scoped>
 :global(.el-notification) {
+  width: auto;
   box-shadow: 0px 0px 16px 0px rgba(176, 197, 222, 0.5);
+  margin: 0;
+  padding: 15.2px 12px 15.2px 6px;
 }
 
-:global(.success-notification__icon) {
-  margin: 0 4px;
+:global(.el-notification__group) {
+  margin: 0;
+  margin-left: 4px;
+}
+
+:global(.el-notification__content) {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  color: rgba(84, 84, 84, 1);
+
+}
+
+:global(--el-notification-icon-size) {
+  width: 20px;
+  height: 20px;
+}
+
+:global(.el-notification.left) {
+  left: 32px;
+  bottom: 48px !important;
+}
+
+:global(.el-message) {
+  top: 64px !important;
+  margin: 0;
+  padding: 12px 16px;
+  border-radius: 40px;
+  background: rgba(84, 84, 84, 1);
+  color: rgba(255, 255, 255, 1);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 20px;
+
+}
+
+:global(.el-message__icon) {
+  margin-right: 5px;
 }
 </style>

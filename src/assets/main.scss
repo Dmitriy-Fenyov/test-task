@@ -1,6 +1,19 @@
 @import 'normalize.css';
+@font-face {
+  font-family: "Proxima Nova";
+  font-style: normal;
+  font-weight: 400;
+  src: url("ProximaNovaCond-Regular.woff") format("woff");
+}
+@font-face {
+  font-family: "Proxima Nova";
+  font-style: normal;
+  font-weight: 700;
+  src: url("ProximaNova-Bold.woff") format("woff");
+}
+
 body {
-  font-family: Proxima Nova;
+  font-family: "Proxima Nova", sans-serif;
 }
 
 .display {

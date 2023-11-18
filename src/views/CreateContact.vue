@@ -4,46 +4,46 @@
     <h2 class="createContact__title">Новый контакт</h2>
     <el-form :model="validateForm" label-width="120px">
       <el-form-item label="Имя">
-        <el-input 
-          class="createContact__input" 
-          :class="{ 'error':  !formFields.name.isValid }" 
-          placeholder="Например «Андрей»..." 
-          v-model="name" 
+        <el-input
+          class="createContact__input"
+          :class="{ 'error': !formFields.name.isValid }"
+          v-model="name"
+          placeholder="Например «Андрей»..."
         />
         <ErrorField v-if="!formFields.name.isValid">
           Слишком короткое имя
-        </ErrorField> 
+        </ErrorField>
       </el-form-item>
       <el-form-item label="Телефон">
-        <el-input 
-          class="createContact__input" 
-          :class="{ 'error':  !formFields.tel.isValid }" 
-          placeholder="+7(___)___-__-__" 
-          v-model="tel" 
-          :formatter="telFormatter" 
+        <el-input
+          class="createContact__input"
+          :class="{ 'error': !formFields.tel.isValid }"
+          v-model="tel"
+          placeholder="+7(___)___-__-__"
+          :formatter="telFormatter"
         />
         <ErrorField v-if="!formFields.tel.isValid">
           Некорректный номер
-        </ErrorField> 
+        </ErrorField>
       </el-form-item>
       <el-form-item label="E-mail">
-        <el-input 
-          class="createContact__input" 
-          type="email" 
-          :class="{ 'error':  !formFields.mail.isValid }" 
-          placeholder="Например «pochta@domain.ru»..." 
+        <el-input
+          class="createContact__input"
           v-model="mail"
+          type="email"
+          :class="{ 'error': !formFields.mail.isValid }"
+          placeholder="Например «pochta@domain.ru»..."
         />
         <ErrorField v-if="!formFields.mail.isValid">
           Не корректный e-mail
-        </ErrorField> 
+        </ErrorField>
       </el-form-item>
       <el-form-item label="Категория">
-        <el-select 
-          class="createContact__input" 
-          v-model="category" 
-          :class="{ 'error':  !formFields.category.isValid }" 
-          placeholder="Не выбрано" 
+        <el-select
+          class="createContact__input"
+          v-model="category"
+          :class="{ 'error': !formFields.category.isValid }"
+          placeholder="Не выбрано"
           :suffix-icon="ElSelectSuffixIcon"
         >
           <el-option label="Родственник" value="Родственник" />
@@ -54,21 +54,21 @@
         </ErrorField>
       </el-form-item>
     </el-form>
-    <el-button 
-      type="warning" 
-      class="createContact__btnSave" 
-      @click.prevent="addItem" 
-      :loading="!isLoaded" 
-    > 
+    <el-button
+      type="warning"
+      class="createContact__btnSave"
+      @click.prevent="addItem"
+      :loading="!isLoaded"
+    >
       <span v-show="isLoaded" style="margin-right: 6px;">
-        <img src="@/assets/save.svg"  alt="Сохранить" width="12" height="12">
+        <img src="@/assets/save.svg" alt="Сохранить" width="12" height="12">
       </span>
       Сохранить
     </el-button>
     <SuccessNotification ref="successNotification" message="Контакт успешно создан" />
   </div>
 </template>
-  
+
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
@@ -125,8 +125,8 @@ const successNotification = ref(null)
 const addItem = () => {
   validateForm()
   if (isFormValid.value === true) {
-    isLoaded.value= false
-    setTimeout(async() => {
+    isLoaded.value = false
+    setTimeout(() => {
       addressStore.createConcat(name.value, tel.value.slice(0, 16), mail.value, category.value)
       name.value = ''
       tel.value = ''
@@ -134,8 +134,8 @@ const addItem = () => {
       category.value = ''
       isLoaded.value = true
       successNotification.value.open()
-      router.push({name:'home'})
-    },3000)
+      router.push({ name: 'home' })
+    }, 3000)
   }
 }
 </script>
@@ -250,4 +250,3 @@ const addItem = () => {
   }
 }
 </style>
-  

@@ -2,31 +2,30 @@
 import { storeToRefs } from 'pinia'
 import { ref, onBeforeMount } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import {useAddressMockStore} from '@/stores/MockStore';
+import { useAddressMockStore } from '@/stores/MockStore';
 import SuccessNotification from '@/components/SuccessNotification.vue'
 
-
 const addressStore = useAddressMockStore()
-const {address} = storeToRefs(addressStore)
+const { address } = storeToRefs(addressStore)
 const route = useRoute()
 const router = useRouter()
 const contact = ref({})
-const isLoaded =  ref(true)
+const isLoaded = ref(true)
 const notificationDelete = ref(null)
 const notificationChange = ref(null)
 const handleSave = () => {
-  isLoaded.value= false
-  setTimeout(async() => {
+  isLoaded.value = false
+  setTimeout(() => {
     addressStore.editContact(contact.value)
-    isLoaded.value= true
+    isLoaded.value = true
     notificationChange.value.open()
-    router.push({name:'home'})
-  },3000)
+    router.push({ name: 'home' })
+  }, 3000)
 }
 const deleteContact = () => {
   addressStore.deleteContact(contact.value.id)
   notificationDelete.value.open()
-  router.push({name:'home'})
+  router.push({ name: 'home' })
 }
 
 onBeforeMount(() => {
@@ -38,11 +37,11 @@ onBeforeMount(() => {
 <template>
   <header class="сontactCard__Header">
     <span class="firstLetter">{{ contact.name[0] }}</span>
-    <p class="сontactCard__Header__title"> {{contact.name}}</p>
-    <button 
-      class="сontactCard__Header__close-button" 
-      type="button" 
-      @click="() => { router.push({name:'home'}) }"
+    <p class="сontactCard__Header__title"> {{ contact.name }}</p>
+    <button
+      class="сontactCard__Header__close-button"
+      type="button"
+      @click="() => { router.push({ name: 'home' }) }"
     >
       <span class="visually-hidden">Закрыть меню</span>
     </button>
@@ -69,18 +68,16 @@ onBeforeMount(() => {
         <p class="сontactCard__text"> {{ contact.dateOfCreation }}</p>
       </el-form-item>
     </el-form>
-    <el-button 
-        type="warning" 
-        class="сontactCard__btnSave" 
-        @click="handleSave" :loading="!isLoaded"
-    > 
-    <span 
-        v-show="isLoaded" 
-        style="margin-right: 6px;"
+    <el-button
+      type="warning"
+      class="сontactCard__btnSave"
+      @click="handleSave"
+      :loading="!isLoaded"
     >
-    <img src="@/assets/save.svg"  alt="Сохранить" width="12" height="12">
-    </span>
-    Сохранить
+      <span v-show="isLoaded" style="margin-right: 6px;">
+        <img src="@/assets/save.svg" alt="Сохранить" width="12" height="12">
+      </span>
+      Сохранить
     </el-button>
     <el-button
       class="сontactCard__btnDelete"
@@ -106,33 +103,40 @@ onBeforeMount(() => {
   margin: 24px auto 0;
   padding: 48px 64px 136px 64px;
   box-shadow: 0px 0px 6px 0px #94B5E159;
+
   @media (min-width: 576px) and (max-width: 768px) {
     width: 552px;
     padding: 32px 48px 112px 48px;
   }
+
   @media (min-width: 376px) and (max-width: 576px) {
     width: 352px;
     padding: 32px 20px 112px 20px;
   }
+
   :deep(.el-form-item__label) {
     justify-content: flex-start;
   }
+
   &__title {
     margin: 0;
     margin-bottom: 24px;
     color: #545454;
   }
+
   &__input {
     width: 408px;
     margin-left: auto;
   }
+
   &__text {
     margin: 0;
     margin-left: auto;
     width: 408px;
     color: #545454;
   }
-  &__btnSave{
+
+  &__btnSave {
     margin-left: 168px;
     margin-top: 14px;
     width: 136px;
@@ -150,9 +154,11 @@ onBeforeMount(() => {
     cursor: pointer;
     text-transform: uppercase;
     color: #545454;
+
     @media (min-width: 576px) and (max-width: 768px) {
       margin-left: 119px;
     }
+
     @media (min-width: 376px) and (max-width: 576px) {
       margin-left: 30px;
       width: 124px;
@@ -160,16 +166,19 @@ onBeforeMount(() => {
       font-size: 12px;
       line-height: 14.4px;
     }
+
     &:hover {
       color: #545454;
-      background:#FFD84C;
+      background: #FFD84C;
     }
+
     &:active {
       color: #545454;
       background: #F3C41E;
     }
   }
 }
+
 .сontactCard__Header {
   display: flex;
   justify-content: center;
@@ -177,6 +186,7 @@ onBeforeMount(() => {
   padding: 11.5px 48px;
   margin: 0 auto;
   background-color: #282828;
+
   &__title {
     margin: 0 0 0 10px;
     font-family: Proxima Nova;
@@ -187,6 +197,7 @@ onBeforeMount(() => {
     text-align: center;
     color: #E0E0E0;
   }
+
   &__close-button {
     position: absolute;
     top: 17px;
@@ -197,24 +208,28 @@ onBeforeMount(() => {
     background-color: transparent;
     cursor: pointer;
     border: none;
-      &::before,
-      &::after {
-        content: "";
-        position: absolute;
-        top: 5px;
-        right: 30px;
-        width: 18.7px;
-        height: 3px;
-        background-color: #939393;
-      }
-      &::before {
-        transform: rotate(45deg);
-      }
-      &::after {
-        transform: rotate(-45deg);
-      }
-  }   
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 5px;
+      right: 30px;
+      width: 18.7px;
+      height: 3px;
+      background-color: #939393;
+    }
+
+    &::before {
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      transform: rotate(-45deg);
+    }
+  }
 }
+
 .сontactCard__btnDelete {
   margin-top: 15px;
   margin-left: 25px;
@@ -229,6 +244,7 @@ onBeforeMount(() => {
   background-color: white;
   cursor: pointer;
 }
+
 .firstLetter {
   text-align: center;
   line-height: 24px;
@@ -238,6 +254,7 @@ onBeforeMount(() => {
   border-radius: 56px;
   background-color: #FFC700;
 }
+
 .visually-hidden {
   visibility: hidden;
 }

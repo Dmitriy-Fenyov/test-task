@@ -1,14 +1,14 @@
 <template>
   <header class="page-createHeader">
-    <img src="@/assets/createLogo.svg"  alt="Контакты" width="20" height="20">
+    <img src="@/assets/createLogo.svg" alt="Контакты" width="20" height="20">
     <span class="firstLetter">{{ contact.name[0] }}</span>
-    <h2 class="page-createHeader__title"> {{name}}</h2>
-    <button class="page-createHeader__close-button" type="button" @click="() => { router.push({name:'home'}) }">
+    <h2 class="page-createHeader__title"> {{ name }}</h2>
+    <button class="page-createHeader__close-button" type="button" @click="() => { router.push({ name: 'home' }) }">
       <span class="visually-hidden">Закрыть меню</span>
     </button>
   </header>
 </template>
-  
+
 <script setup>
 import { useRouter } from 'vue-router'
 
@@ -23,6 +23,7 @@ const router = useRouter()
   padding: 11.5px 48px;
   margin: 0 auto;
   background-color: #282828;
+
   &__title {
     margin: 0 0 0 10px;
     font-family: Proxima Nova;
@@ -33,35 +34,39 @@ const router = useRouter()
     text-align: center;
     color: #E0E0E0;
   }
+
   &__close-button {
-  position: absolute;
-  top: 17px;
-  right: 10px;
-  width: 19px;
-  height: 19px;
-  content: "";
-  background-color: transparent;
-  cursor: pointer;
-  border: none;
+    position: absolute;
+    top: 17px;
+    right: 10px;
+    width: 19px;
+    height: 19px;
+    content: "";
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+
     &::before,
     &::after {
-    content: "";
-    position: absolute;
-    top: 5px;
-    right: 30px;
-    width: 18.7px;
-    height: 3px;
-    background-color: #939393;
+      content: "";
+      position: absolute;
+      top: 5px;
+      right: 30px;
+      width: 18.7px;
+      height: 3px;
+      background-color: #939393;
     }
+
     &::before {
       transform: rotate(45deg);
     }
+
     &::after {
       transform: rotate(-45deg);
     }
-  }   
+  }
 }
+
 .visually-hidden {
   visibility: hidden;
-}
-</style>
+}</style>

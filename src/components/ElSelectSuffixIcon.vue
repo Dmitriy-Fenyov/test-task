@@ -1,7 +1,7 @@
 <template>
   <span class="el-select-suffix-icon" />
 </template>
-  
+
 <style lang="scss" scoped>
 .el-select-suffix-icon {
   width: 0;
@@ -11,4 +11,3 @@
   border-top: 4px solid #A9A9A9;
 }
 </style>
-  
