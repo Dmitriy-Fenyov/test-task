@@ -27,16 +27,16 @@
     line-height: 22px;
     text-transform: uppercase;
     color: #E0E0E0;
-    @media (min-width: 376px) and (max-width: 768px) {
+    @media (min-width: 376px) and (max-width: 992px) {
       margin-left: 8px;
       font-size: 14px;
-  }
+    }
   }
 
   &__logo {
-    @media (min-width: 376px) and (max-width: 768px) {
-      width: 32px;
+    @media (min-width: 376px) and (max-width: 992px) {
+      width: 31px;
       height: 24px;
-  }
+    }
   }
 }</style>

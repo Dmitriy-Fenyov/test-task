@@ -60,7 +60,7 @@
       @click.prevent="addItem"
       :loading="!isLoaded"
     >
-      <span v-show="isLoaded" style="margin-right: 6px;">
+      <span v-show="isLoaded" style="margin-right: 6px; margin-top: 2px;">
         <img src="@/assets/save.svg" alt="Сохранить" width="12" height="12">
       </span>
       Сохранить
@@ -191,11 +191,9 @@ const addItem = () => {
     padding: 12px, 16px, 12px, 16px;
     border-radius: 4px;
     background: #FFC700;
-    font-family: Proxima Nova;
     font-size: 14px;
     font-weight: 700;
     line-height: 17px;
-    letter-spacing: 0em;
     text-align: center;
     border: none;
     cursor: pointer;
@@ -230,12 +228,9 @@ const addItem = () => {
     top: 33px;
     right: 0;
     margin: 0;
-    font-family: Proxima Nova;
     font-size: 10px;
     font-weight: 400;
     line-height: 16px;
-    letter-spacing: 0em;
-    text-align: left;
     color: #EB5757;
   }
 

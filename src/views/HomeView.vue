@@ -85,12 +85,9 @@ const { filteredContacts } = storeToRefs(addressStore)
   padding: 0;
   margin: 0;
   align-items: center;
-  font-family: Proxima Nova;
   font-size: 10px;
   font-weight: 400;
   line-height: 16px;
-  letter-spacing: 0em;
-  text-align: left;
   text-transform: uppercase;
   color: #B5B5B5;
 
@@ -121,8 +118,7 @@ const { filteredContacts } = storeToRefs(addressStore)
     }
 
     @media (min-width: 376px) and (max-width: 576px) {
-      width: 38%;
-      font-size: 10px;
+      width: 32%;
     }
   }
 
@@ -152,16 +148,13 @@ const { filteredContacts } = storeToRefs(addressStore)
   margin: 0;
   align-items: center;
   vertical-align: middle;
-  font-family: Proxima Nova;
   font-size: 14px;
   font-weight: 400;
   line-height: 22.4px;
-  letter-spacing: 0em;
   color: #545454;
   border-bottom: 1px solid #EAF2FD;
 
   @media (min-width: 768px) and (max-width: 991px) {
-    font-size: 12px;
     line-height: 19px;
   }
 
@@ -226,6 +219,8 @@ const { filteredContacts } = storeToRefs(addressStore)
   width: 24px;
   height: 24px;
   margin-right: 12px;
+  font-size: 12px;
+  font-weight: 700;
   line-height: 24px;
   text-align: center;
   background-color: #FFC700;
@@ -239,16 +234,16 @@ const { filteredContacts } = storeToRefs(addressStore)
 .wrapper__flexBox {
   display: flex;
   width: 51.6%;
+  font-size: 12px;
 
   @media (max-width: 576px) {
     flex-direction: column;
     width: 41.76%;
-    font-family: Proxima Nova;
-    font-size: 12px;
     line-height: 16px;
   }
 }
 
 .row {
   flex-direction: row;
+  font-size: 10px;
 }</style>

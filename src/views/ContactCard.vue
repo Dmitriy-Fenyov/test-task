@@ -37,7 +37,7 @@ onBeforeMount(() => {
 <template>
   <header class="сontactCard__Header">
     <span class="firstLetter">{{ contact.name[0] }}</span>
-    <p class="сontactCard__Header__title"> {{ contact.name }}</p>
+    <h1 class="сontactCard__Header__title"> {{ contact.name }}</h1>
     <button
       class="сontactCard__Header__close-button"
       type="button"
@@ -74,7 +74,7 @@ onBeforeMount(() => {
       @click="handleSave"
       :loading="!isLoaded"
     >
-      <span v-show="isLoaded" style="margin-right: 6px;">
+      <span v-show="isLoaded" style="margin-right: 6px; margin-top: 2px;">
         <img src="@/assets/save.svg" alt="Сохранить" width="12" height="12">
       </span>
       Сохранить
@@ -144,12 +144,9 @@ onBeforeMount(() => {
     padding: 12px, 16px, 12px, 16px;
     border-radius: 4px;
     background: #FFC700;
-    font-family: Proxima Nova;
     font-size: 14px;
     font-weight: 700;
     line-height: 17px;
-    letter-spacing: 0em;
-    text-align: center;
     border: none;
     cursor: pointer;
     text-transform: uppercase;
@@ -189,13 +186,14 @@ onBeforeMount(() => {
 
   &__title {
     margin: 0 0 0 10px;
-    font-family: Proxima Nova;
     font-size: 20px;
     font-weight: 700;
     line-height: 24px;
-    letter-spacing: 0em;
-    text-align: center;
     color: #E0E0E0;
+    @media (min-width: 376px) and (max-width: 992px) {
+    font-size: 14px;
+    margin-left: 8px;
+    }
   }
 
   &__close-button {
@@ -218,6 +216,9 @@ onBeforeMount(() => {
       width: 18.7px;
       height: 3px;
       background-color: #939393;
+      @media (min-width: 376px) and (max-width: 992px) {
+        width: 14px;
+      }
     }
 
     &::before {
@@ -233,11 +234,9 @@ onBeforeMount(() => {
 .сontactCard__btnDelete {
   margin-top: 15px;
   margin-left: 25px;
-  font-family: Proxima Nova;
   font-size: 12px;
   font-weight: 400;
   line-height: 15px;
-  letter-spacing: 0em;
   text-align: right;
   color: #2F80ED;
   border: none;
@@ -247,12 +246,22 @@ onBeforeMount(() => {
 
 .firstLetter {
   text-align: center;
+  vertical-align:middle;
   line-height: 24px;
+  font-weight: 700;
   margin: 0;
   width: 24px;
   height: 24px;
   border-radius: 56px;
   background-color: #FFC700;
+
+  @media (min-width: 376px) and (max-width: 992px) {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 20px;
+  }
 }
 
 .visually-hidden {

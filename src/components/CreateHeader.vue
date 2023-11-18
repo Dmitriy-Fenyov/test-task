@@ -1,8 +1,8 @@
 <template>
-  <header class="page-createHeader">
-    <img src="@/assets/createLogo.svg" alt="Контакты" width="20" height="20">
-    <h1 class="page-createHeader__title">Добавить контакт</h1>
-    <button class="page-createHeader__close-button" type="button" @click="() => { router.push({ name: 'home' }) }">
+  <header class="createHeader">
+    <img class="createHeader__logo" src="@/assets/createLogo.svg" alt="Контакты" width="20" height="20">
+    <h1 class="createHeader__title">Добавить контакт</h1>
+    <button class="createHeader__close-button" type="button" @click="() => { router.push({ name: 'home' }) }">
       <span class="visually-hidden">Закрыть меню</span>
     </button>
   </header>
@@ -15,7 +15,7 @@ const router = useRouter()
 </script>
 
 <style lang="scss" scoped>
-.page-createHeader {
+.createHeader {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,13 +25,21 @@ const router = useRouter()
 
   &__title {
     margin: 0 0 0 10px;
-    font-family: Proxima Nova;
     font-size: 20px;
     font-weight: 700;
     line-height: 24px;
-    letter-spacing: 0em;
-    text-align: center;
     color: #E0E0E0;
+    @media (min-width: 376px) and (max-width: 992px) {
+      margin-left: 5px;
+      font-size: 14px;
+    }
+  }
+
+  &__logo {
+    @media (min-width: 376px) and (max-width: 992px) {
+      width: 13px;
+      height: 13px;
+    }
   }
 
   &__close-button {
@@ -54,6 +62,9 @@ const router = useRouter()
       width: 18.7px;
       height: 3px;
       background-color: #939393;
+      @media (min-width: 376px) and (max-width: 992px) {
+        width: 14px;
+      }
     }
 
     &::before {
@@ -68,4 +79,5 @@ const router = useRouter()
 
 .visually-hidden {
   visibility: hidden;
-}</style>
+}
+</style>

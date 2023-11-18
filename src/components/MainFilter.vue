@@ -93,11 +93,9 @@ const onFilterChange = (val) => {
     border-radius: 28px;
     border: 1px solid #2F80ED;
     color: #2F80ED;
-    font-family: Proxima Nova;
     font-size: 12px;
     font-weight: 700;
     line-height: 16px;
-    letter-spacing: 0em;
     text-align: center;
     text-transform: uppercase;
     cursor: pointer;
@@ -106,7 +104,7 @@ const onFilterChange = (val) => {
     &::after {
       content: "";
       position: absolute;
-      top: 14.5px;
+      top: 14px;
       left: 16px;
       width: 10.7px;
       height: 1px;

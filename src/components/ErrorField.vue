@@ -16,11 +16,9 @@
     top: 33px;
     right: 0;
     margin: 0;
-    font-family: Proxima Nova;
     font-size: 10px;
     font-weight: 400;
     line-height: 16px;
-    letter-spacing: 0em;
     text-align: left;
     color: #EB5757;
   }
