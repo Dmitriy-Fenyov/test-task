@@ -7,7 +7,7 @@ export const useAddressMockStore = defineStore('addressMockStore', {
         id: 1,
         name: 'Айтишник Данила',
         tel: '+7(987)654-78-09',
-        mail: 'qqqeeeqq@gmail.com',
+        mail: 'nelfeelingood@gmail.com',
         dateOfCreation: '22.09.2023',
         category: 'Родственник'
       },
@@ -15,7 +15,7 @@ export const useAddressMockStore = defineStore('addressMockStore', {
         id: 2,
         name: 'Арендодатель Виктория',
         tel: '+7(987)654-78-10',
-        mail: 'qwwwwqqq@gmail.com',
+        mail: 'nelfeelingood1@gmail.com',
         dateOfCreation: '22.09.2023',
         category: 'Коллега'
       },
@@ -23,7 +23,7 @@ export const useAddressMockStore = defineStore('addressMockStore', {
         id: 3,
         name: 'Двери Вадим',
         tel: '+7(987)654-78-11',
-        mail: 'qqqqq@gmail.com',
+        mail: 'nelfeelingood2@gmail.com',
         dateOfCreation: '23.09.2023',
         category: 'Родственник'
       },
@@ -31,7 +31,7 @@ export const useAddressMockStore = defineStore('addressMockStore', {
         id: 4,
         name: 'Доставка Андрей Стоянов',
         tel: '+7(987)654-78-12',
-        mail: 'qqqqq@gmail.com',
+        mail: 'nelfeelingood3@gmail.com',
         dateOfCreation: '24.09.2023',
         category: 'Родственник'
       },
